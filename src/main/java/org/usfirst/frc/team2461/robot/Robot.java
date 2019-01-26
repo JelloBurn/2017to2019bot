@@ -2,8 +2,6 @@ package org.usfirst.frc.team2461.robot;
 
 import org.usfirst.frc.team2461.robot.autonomous.*;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Compressor;
