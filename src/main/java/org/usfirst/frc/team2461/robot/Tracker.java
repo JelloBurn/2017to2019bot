@@ -34,7 +34,6 @@ public class Tracker
 	private Exception e;
 	private int numberofContours;
 	private boolean foundTarget = false;
-	private boolean enableTracking = false;
 	private int cameraChoice = 0;
 	private MetalSkinsController player;
 	private boolean lastButtonState = false;
@@ -178,7 +177,6 @@ public class Tracker
 
 	public void stopTracking()
 	{
-		enableTracking = false;
 		if (visionThread != null)
 		{
 			// visionThread.interrupt();
