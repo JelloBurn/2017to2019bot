@@ -20,7 +20,6 @@ public class RightTurnAuto
 	private double maximumTurnSpeed = 0.25;
 	private double initialDriveForwardTime = 2.5;
 	private double centerUpDriveForwardTime = 3.8;
-//	private double certerUpTurnModifier = 0.0045;
 	private double targetRange = 20;
 	private boolean debugState = false;
 	

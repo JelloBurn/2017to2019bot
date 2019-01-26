@@ -15,7 +15,7 @@ public class RobotLift
 	enum State {BEGIN, LIFT_FORWARD, LIFT_REVERSE, LIFT_FORWARD_STOP, LIFT_REVERSE_STOP, LIFT_NEUTRAL};
 	private State ropeState;
 	private boolean debugState = false;
-	private boolean lastButtonState = false;
+//	private boolean lastButtonState = false;
 
 	/**
 	 * This constructor takes in a limit switch so that
@@ -193,6 +193,7 @@ public class RobotLift
 		ropeState = State.LIFT_NEUTRAL;
 	}
 	
+	/*
 	private boolean checkButtonBumperRight()
 	{
 		if(player.getBumper(Hand.kRight) && !lastButtonState)
@@ -210,7 +211,8 @@ public class RobotLift
 			return false;
 		}
 	}
-	
+	*/
+
 	private void debug()
 	{
 		SmartDashboard.putString("Robot Lift - ropeState", ropeState.toString());

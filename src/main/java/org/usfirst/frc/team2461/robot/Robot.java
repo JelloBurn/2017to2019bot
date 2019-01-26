@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
+public class Robot extends TimedRobot
 {
 	// ****Creating Constants to use****
 	// =================================
@@ -106,13 +106,13 @@ public class Robot extends IterativeRobot
 	// DigitalInput robotLiftLimitSwitch = new DigitalInput(2);
 	// RobotLift robotLift = new RobotLift(motor1, motor1, robotLiftLimitSwitch,
 	// player1);
-	
+
 	//****Create Break Stop Subsystem****
 	//===================================
 	DoubleSolenoid breakStopDoubleSolenoid = new DoubleSolenoid(BREAK_STOP_SOLENOIDS[0], BREAK_STOP_SOLENOIDS[1]);
 	BreakStop breakStop = new BreakStop(breakStopDoubleSolenoid, player1);
 	Compressor c = new Compressor();
-	
+
 	boolean isDisabled = false;
 
 	/**
@@ -122,10 +122,10 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("Left Auto", LeftAuto);
-		chooser.addObject("Center Auto", CenterAuto);
-		chooser.addObject("Right Auto", RightAuto);
+		chooser.setDefaultOption("Default Auto", defaultAuto);
+		chooser.addOption("Left Auto", LeftAuto);
+		chooser.addOption("Center Auto", CenterAuto);
+		chooser.addOption("Right Auto", RightAuto);
 		SmartDashboard.putData("Auto choices", chooser);
 
 		//acc.setRange(Range.k4G);
@@ -145,7 +145,7 @@ public class Robot extends IterativeRobot
 
 		// ****Setting up Camera****
 		track = new Tracker(player1);
-		
+
 		// ****Starting Compressor Stuff****
 		c.setClosedLoopControl(true);
 		c.start();
@@ -167,7 +167,7 @@ public class Robot extends IterativeRobot
 	{
 		autoSelected = chooser.getSelected();
 		//track.startTracking();
-	
+
 		switch (autoSelected)
 		{
 			case LeftAuto:
@@ -241,9 +241,9 @@ public class Robot extends IterativeRobot
 		{
 			isDisabled = false;
 		}
-		
+
 		// ****Normal Operation Stuff****
-		
+
 		//Drive normal unless using rear camera. Flip driving controls if so!
 		if(track.getCurrentCamera() == 0) {
 			//chassis.mecanumDrive_Cartesian(player1.getX(Hand.kLeft) * powerFactor, player1.getY(Hand.kLeft) * powerFactor, player1.getX(Hand.kRight) * powerFactor, 0);
@@ -252,7 +252,7 @@ public class Robot extends IterativeRobot
 			//chassis.mecanumDrive_Cartesian(-player1.getX(Hand.kLeft) * powerFactor, -player1.getY(Hand.kLeft) * powerFactor, player1.getX(Hand.kRight) * powerFactor, 0);
 			chassis.driveCartesian(-player1.getY(Hand.kLeft) * powerFactor, -player1.getX(Hand.kLeft) * powerFactor, player1.getX(Hand.kRight) * powerFactor);
 		}
-		
+
 		ballCollector.run();
 		gearManager.run();
 		robotLift.run();
@@ -260,8 +260,8 @@ public class Robot extends IterativeRobot
 		track.run();
 		SmartDashboard.putString("Camera View", track.getCurrentCameraString());
 		SmartDashboard.putBoolean("Camera View Bool", track.getCurrentCamera() == 0);
-		
-		
+
+
 	}
 
 	/**
@@ -288,7 +288,7 @@ public class Robot extends IterativeRobot
 	{
 		return time.get();
 	}
-	
+
 	public void debugThings()
 	{
 		// Updating values and outputs to the SmartDashboard
@@ -300,7 +300,7 @@ public class Robot extends IterativeRobot
 				SmartDashboard.putNumber("Velocity y", pidDriveTrain.getVelocities()[1]);
 				SmartDashboard.putNumber("Distance X", pidDriveTrain.getDistanceXTraveled());
 				SmartDashboard.putNumber("Distance Y", pidDriveTrain.getDistanceYTraveled());
-				
+
 				// SmartDashboard.putNumber("Distance X",
 				// pidDriveTrain.getDistanceXTraveled());
 				// SmartDashboard.putNumber("Distance Y",
